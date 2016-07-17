@@ -18,12 +18,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     var movies: [NSDictionary]?
     var refreshControl: UIRefreshControl!
+    var endpoint: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        self.flickTableView.backgroundColor = UIColor.
         self.networkErrorView.hidden = true
-        
         flickTableView.dataSource = self
         flickTableView.delegate = self
         
@@ -34,8 +34,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         // Reuse the method to do the first load as well
         self.refreshControlAction(refreshControl)
         
-//        self.fetchMovieData()
-
         // Do any additional setup after loading the view.
     }
 
@@ -63,8 +61,30 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         let imageBaseUrl = "http://image.tmdb.org/t/p/w500"
         if let posterPath = movie?["poster_path"] as? String {
-            let imageUrl = NSURL(string: imageBaseUrl + posterPath)
-            cell.movieImageView.setImageWithURL(imageUrl!)
+            let imageUrl = imageBaseUrl + posterPath
+            let imageRequest = NSURLRequest(URL: NSURL(string: imageUrl)!)
+            
+            cell.movieImageView.setImageWithURLRequest(
+                imageRequest,
+                placeholderImage: nil,
+                success: { (imageRequest, imageResponse, image) -> Void in
+                    
+                    // imageResponse will be nil if the image is cached
+                    if imageResponse != nil {
+                        //  print("Image was NOT cached, fade in image")
+                        cell.movieImageView.alpha = 0.0
+                        cell.movieImageView.image = image
+                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                            cell.movieImageView.alpha = 1.0
+                        })
+                    } else {
+                        // print("Image was cached so just update the image")
+                        cell.movieImageView.image = image
+                    }
+                },
+                failure: { (imageRequest, imageResponse, error) -> Void in
+                    cell.movieImageView.image = UIImage(named: "not_available.jpg")
+            })
         }
         
         print("row \(indexPath.row)")
@@ -88,7 +108,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
         let clientId = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = NSURL(string:"https://api.themoviedb.org/3/movie/now_playing?api_key=\(clientId)")
+        let url = NSURL(string:"https://api.themoviedb.org/3/movie/\(endpoint)?api_key=\(clientId)")
         let request = NSURLRequest(URL: url!)
         let session = NSURLSession(
             configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
@@ -118,8 +138,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         task.resume()
     }
     
-    // Reference:
-    // http://stackoverflow.com/questions/30743408/check-for-internet-connection-in-swift-2-ios-9
+    // Reference: http://stackoverflow.com/questions/30743408/check-for-internet-connection-in-swift-2-ios-9
     func isConnectedToNetwork() -> Bool {
         var zeroAddress = sockaddr_in()
         zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
@@ -149,7 +168,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         let detailViewController = segue.destinationViewController as! DetailViewController
         detailViewController.movie = movie
-        
         
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.

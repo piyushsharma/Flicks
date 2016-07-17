@@ -16,7 +16,8 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="117" sectionHeaderHeight="28" sectionFooterHeight="28" id="q4k-rx-hcm">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="0.81072744809999997" blue="0.083975793980000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexBackgroundColor" red="0.022628630050000001" green="0.022628630050000001" blue="0.022628630050000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="117" id="U3B-gJ-5c3" customClass="MovieCell" customModule="Flicks" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="320" height="117"/>
@@ -45,6 +46,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="0.80450266449999996" blue="0.075595917380000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="movieImageView" destination="ibt-pG-og0" id="gjo-jI-3MA"/>
                                             <outlet property="overviewLabel" destination="pdO-bs-MDu" id="DIh-cj-FAH"/>
@@ -60,8 +62,9 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.022628630050000001" green="0.022628630050000001" blue="0.022628630050000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Now Playing" id="sFr-6h-laJ"/>
                     <navigationItem key="navigationItem" title="Movies" id="Qvc-xb-a8A"/>
                     <connections>
                         <outlet property="flickTableView" destination="q4k-rx-hcm" id="07q-5G-bRK"/>
@@ -110,6 +113,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" red="1" green="0.80450266449999996" blue="0.075595917380000002" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -130,11 +134,12 @@
         <!--Navigation Controller-->
         <scene sceneID="2Zr-ZF-uLh">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8SC-fa-SZa" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MoviesNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="8SC-fa-SZa" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2Kw-mq-Uda">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" id="2Kw-mq-Uda">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="1" green="0.81072744809999997" blue="0.083975793980000005" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -143,7 +148,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GIa-fw-WKe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-95" y="335"/>
+            <point key="canvasLocation" x="-85" y="318"/>
         </scene>
     </scenes>
 </document>
