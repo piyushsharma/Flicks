@@ -30,7 +30,7 @@ class DetailViewController: UIViewController {
         self.titleLabel.text = title
         self.overviewLabel.text = overview
         
-        self.overviewLabel.sizeToFit()
+        self.overviewLabel.sizeToFit()        
         
         let imageBaseUrl = "http://image.tmdb.org/t/p/w500"
         if let posterPath = movie?["poster_path"] as? String {

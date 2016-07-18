@@ -22,7 +22,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.flickTableView.backgroundColor = UIColor.
+        
+        self.flickTableView.separatorColor = UIColor.blackColor()
+                
         self.networkErrorView.hidden = true
         flickTableView.dataSource = self
         flickTableView.delegate = self
@@ -50,12 +52,19 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         return 0
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.flickTableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.flickTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = flickTableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
         let movie = self.movies?[indexPath.row]
         let title = movie?["title"] as? String
         let overview = movie?["overview"] as? String
+        
+        
         cell.titleLabel.text = title
         cell.overviewLabel.text = overview
         

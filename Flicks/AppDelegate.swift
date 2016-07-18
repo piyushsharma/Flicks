@@ -36,7 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [nowPlayingNavigationController, topRatedNavigationController]
-        
+        tabBarController.tabBar.backgroundColor = UIColor.yellowColor()
+            
         // Make the Tab Bar Controller the root view controller
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
